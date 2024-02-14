@@ -1,0 +1,10 @@
+project-card {
+    width: 100%;
+    border: 1pxsolidblack;
+    box-shadow: 0px0px5pxgray;
+}
+.project-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
