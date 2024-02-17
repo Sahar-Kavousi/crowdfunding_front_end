@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import{ createBrowserRouter, RouterProvider } from"react-router-dom";
-
 import './global.css'
 
 import HomePage from"./pages/HomePage.jsx";
@@ -17,9 +16,7 @@ const router =createBrowserRouter([
     path:"/",
     element:<HomePage />
   },
-  {
-    path:"/project",
-    element:<ProjectPage />},
+  { path: "/project/:id", element: <ProjectPage /> },,
       ],
     },
   ]);
