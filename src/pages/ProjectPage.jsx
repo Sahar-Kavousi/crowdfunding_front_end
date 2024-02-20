@@ -9,10 +9,10 @@ function ProjectPage() {
     const { project, isLoading, error } = useProject(id);
 
     if (isLoading) {
-        return (<p>loading...</p>)
+        return (<h1>loading...</h1>)
     }
     if (error) {
-        return (<p>{error.message}</p>)
+        return (<h1>{error.message}</h1>)
     }
     
     return (
