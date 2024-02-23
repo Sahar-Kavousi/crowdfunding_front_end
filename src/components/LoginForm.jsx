@@ -39,7 +39,7 @@ const handleSubmit = (event) => {
                 <input type="text" id="username" placeholder="Enter username"  onChange={handleChange}/> 
             </div>
             <div>
-                <label htmlFor="password">Password:</label>
+                <label  htmlFor="password">Password:</label>
                 <input type="password" id="password" placeholder="Password"  onChange={handleChange} />
             </div><button type="submit" onClick={handleSubmit}>Login</button>
         </form>  
