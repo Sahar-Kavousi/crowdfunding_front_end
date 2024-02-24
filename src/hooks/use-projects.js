@@ -12,7 +12,7 @@ export default function useProjects() {
     const [isLoading, setIsLoading] =useState(true);
     const [error, setError] = useState();
 
-    // We use the useEffect hook to fetch the projects from the API and update thestate variables accordingly.
+    // We use the useEffect hook to fetch the projects from the API and update the state variables accordingly.
     // This useEffect will only run once, when the component this hook is used inis mounted.
     useEffect(() =>{
         getProjects()      

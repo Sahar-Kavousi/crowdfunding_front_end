@@ -1,32 +1,37 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import{ createBrowserRouter, RouterProvider } from"react-router-dom";
-import './global.css'
-import './pages/SignupPage.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./global.css";
+import "./pages/SignupPage.css";
 
-import HomePage from"./pages/HomePage.jsx";
-import ProjectPage from"./pages/ProjectPage.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import ProjectPage from "./pages/ProjectPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
 
-import NavBar from"./components/NavBar.jsx";
+import NavBar from "./components/NavBar.jsx";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <NavBar />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/login", element: <LoginPage /> },
+      { path: "/signup", element: <SignUpPage /> },
+      { path: "/contact", element: <ContactPage /> },
+      { path: "/about", element: <AboutPage /> },
+      { path: "/project/:id", element: <ProjectPage /> },
+      ,
+    ],
+  },
+]);
 
-const router =createBrowserRouter([
-  { path:"/", element:<NavBar />, children: [{path:"/", element:<HomePage />},
-  { path: "/login", element: <LoginPage /> },
-  { path: "/signup", element: <SignUpPage /> },
-  { path: "/project/:id", element: <ProjectPage /> },,
-      ],
-    },
-  ]);
-
-
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     {/* Here we wrap our app in the router provider so they render */}
     <RouterProvider router={router} />
-  </React.StrictMode>,
-)
-
+  </React.StrictMode>
+);
