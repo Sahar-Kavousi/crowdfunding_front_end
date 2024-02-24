@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
-import { AiOutlineGooglePlus } from "react-icons/ai";
+// import { AiOutlineGooglePlus } from "react-icons/ai";
 function LoginPage() {
   return (
     <div className="p-4">
       <LoginForm />
       <div className="m-4 bg-blue-400 border-spacing-4">
-        <AiOutlineGooglePlus className="flex text-red-400 text-lg" />
+        {/* <AiOutlineGooglePlus className="flex text-red-400 text-lg" /> */}
       </div>
       <p>
         If you don't have user, Signup
