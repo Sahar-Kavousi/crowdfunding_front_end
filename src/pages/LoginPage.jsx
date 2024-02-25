@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
+
 function LoginPage() {
   return (
     <div className="p-4">
       <LoginForm />
-      <div></div>
       <p>
         If you don't have user, Signup
         <Link

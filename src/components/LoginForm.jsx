@@ -29,12 +29,11 @@ function LoginForm() {
   };
 
   return (
-    <div className="md:container md:mx-auto">
-      <form className=" bg-slate-100 p-5 min-w-60">
+    <div>
+      <form>
         <div>
           <label htmlFor="username">Username:</label>
           <input
-            className="placeholder-shown:border-gray-500"
             type="text"
             id="username"
             placeholder="Enter username"
