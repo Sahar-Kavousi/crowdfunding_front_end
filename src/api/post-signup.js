@@ -1,5 +1,5 @@
-async function postSignUp(username, email, password) {
-  const url = `${import.meta.env.VITE_API_URL}/api-token-auth/`;
+async function postSignUp(username, email, password, firstName, lastName) {
+  const url = `${import.meta.env.VITE_API_URL}/users/`;
   const response = await fetch(url, {
     method: "POST",
     // We need to tell the server that we are sending JSON dataso we set the Content-Type header to application/json
@@ -7,6 +7,8 @@ async function postSignUp(username, email, password) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      first_name: firstName,
+      last_name: lastName,
       username: username,
       email: email,
       password: password,
