@@ -8,23 +8,23 @@ import Typography from "@mui/material/Typography";
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
 
 function ProjectCard(props) {
-  const { projectData } = props;
+  const { projectData: {description, goal, image, raised, title} } = props;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
-        alt={`${projectData.title}.image`}
+        alt={`${title}.image`}
         height="140"
-        image={projectData.image}
+        image={image}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {projectData.title}
+          {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {projectData.description}
+          {description}
         </Typography>
-        <LinearProgressWithLabel value={42} />
+        <LinearProgressWithLabel value={raised && goal ? Math.round(raised / goal * 100) : 0} />
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>
