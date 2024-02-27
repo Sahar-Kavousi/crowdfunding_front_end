@@ -1,5 +1,6 @@
 import useProjects from "../hooks/use-projects";
 import ProjectCard from "../components/ProjectCard";
+import Hero from "../components/Hero";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 
@@ -12,7 +13,8 @@ function HomePage() {
 
   return (
     <>
-      <h1>Home Page</h1>
+      <Hero />
+      <h1>Categories</h1>
 
       <Box
         my={4}
