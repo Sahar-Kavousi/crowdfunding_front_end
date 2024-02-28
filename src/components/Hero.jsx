@@ -42,7 +42,7 @@ export default function Hero() {
               textAlign: "center",
             }}
           >
-            Our latest&nbsp;
+            Empowering&nbsp;
             <Typography
               component="span"
               variant="h1"
@@ -53,13 +53,11 @@ export default function Hero() {
                     : "primary.light",
               }}
             >
-              products
+              Wellness
             </Typography>
           </Typography>
           <Typography variant="body1" textAlign="center" color="text.secondary">
-            Explore our cutting-edge dashboard, delivering high-quality
-            solutions tailored to your needs. <br />
-            Elevate your experience with top-tier features and services.
+            Transforming Lives Through Innovation and Community Support <br />
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -68,7 +66,7 @@ export default function Hero() {
             useFlexGap
             sx={{ pt: 2, width: { xs: "100%", sm: "auto" } }}
           >
-            <TextField
+            {/* <TextField
               id="outlined-basic"
               hiddenLabel
               size="small"
@@ -78,9 +76,9 @@ export default function Hero() {
               inputProps={{
                 autoComplete: "off",
               }}
-            />
+            /> */}
             <Button variant="contained" color="primary">
-              Start now
+              Start a Campaign now
             </Button>
           </Stack>
           <Typography
@@ -88,11 +86,11 @@ export default function Hero() {
             textAlign="center"
             sx={{ opacity: 0.8 }}
           >
-            By clicking &quot;Start now&quot; you agree to our&nbsp;
+            {/* By clicking &quot;Start now&quot; you agree to our&nbsp;
             <Link href="#" color="primary">
               Terms & Conditions
             </Link>
-            .
+            . */}
           </Typography>
         </Stack>
       </Container>
