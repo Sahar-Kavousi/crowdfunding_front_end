@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -8,7 +8,14 @@ import Typography from "@mui/material/Typography";
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
 
 function ProjectCard(props) {
-  const { projectData: {description, goal, image, raised, title} } = props;
+  const {
+    projectData: { id, description, goal, image, raised, title },
+  } = props;
+  const handleShare = () => {};
+  const handleReadMore = () => {
+    console.log("on the handleReadMore");
+    Navigate(`/project/${id}`);
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -24,11 +31,17 @@ function ProjectCard(props) {
         <Typography variant="body2" color="text.secondary">
           {description}
         </Typography>
-        <LinearProgressWithLabel value={raised && goal ? Math.round(raised / goal * 100) : 0} />
+        <LinearProgressWithLabel
+          value={raised && goal ? Math.round((raised / goal) * 100) : 0}
+        />
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button onClick={handleShare} size="small">
+          Share
+        </Button>
+        <Button href={`/project/${id}`} size="small">
+          Learn More
+        </Button>
       </CardActions>
     </Card>
   );

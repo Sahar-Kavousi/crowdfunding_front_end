@@ -12,6 +12,7 @@ import ContactPage from "./pages/ContactPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 
 import NavBar from "./components/NavBar.jsx";
+import { AuthProvider } from "./components/AuthProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,14 +24,16 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignUpPage /> },
       { path: "/contact", element: <ContactPage /> },
       { path: "/about", element: <AboutPage /> },
-      { path: "/project/:id", element: <ProjectPage /> }
+      { path: "/project/:id", element: <ProjectPage /> },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* Here we wrap our app in the router provider so they render */}
-    <RouterProvider router={router} />
+    <AuthProvider>
+      {/* Here we wrap our app in the router provider so they render */}
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
