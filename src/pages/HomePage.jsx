@@ -16,16 +16,6 @@ function HomePage() {
       <Hero />
       <h1>Categories</h1>
 
-      {/* <Box
-        my={4}
-        display="flex"
-        alignItems="center"
-        justifyItems="center"
-        alignContent="center"
-        justifyContent="center"
-        gap={4}
-        p={2}
-      > */}
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}

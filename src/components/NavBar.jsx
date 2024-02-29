@@ -191,8 +191,12 @@ function NavBar() {
             )}
           </Toolbar>
         </Container>
+
       </AppBar>
+        <Container maxWidth="xl">
+
       <Outlet />
+        </Container>
     </>
   );
 }
