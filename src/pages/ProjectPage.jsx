@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import ShareIcon from "@mui/icons-material/Share"; // Import the share icon
 import Grid from "@mui/material/Grid";
 import "./ProjectPage.css";
+import ProjectHeader from "../components/ProjectHeader.jsx";
 
 function ProjectPage() {
   // Here we use a hook that comes for free in react router called `useParams`to get
@@ -182,6 +183,8 @@ function ProjectPage() {
     // </Container>
 
     <div className="product-container">
+      <ProjectHeader/>
+
       <div className="product-row1">
         <div className="product-image">
           <img

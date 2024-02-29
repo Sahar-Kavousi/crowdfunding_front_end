@@ -7,28 +7,30 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Copyright from "../components/Copyright.jsx";
-import AddProjectHeader from "../components/AddProjectHeader.jsx";
-import postLogin from "../api/post-login.js";
+import AddProjectHeader from "../components/ProjectHeader.jsx";
+import postProject from "../api/post-project.js";
 import useAuth from "../hooks/use-auth.js";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Switch from '@mui/material/Switch';
+import {FormControl, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 
 export default function AddProjectPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    firstName: "", // Corrected typo here
-    lastName: "",
+    isOpen: true,
+    image: "",
+    goal: 10, // Corrected typo here
+    endDate: "",
+    startDate: "",
+    description: "",
+    title: "",
   });
 
   const handleChange = (event) => {
@@ -44,24 +46,25 @@ export default function AddProjectPage() {
     event.preventDefault();
 
     if (
-      formData.email &&
-      formData.password &&
-      formData.firstName &&
-      formData.lastName
+      formData.image &&
+      formData.goal &&
+      formData.description &&
+      formData.title
     ) {
-      postSignUp(
-        formData.email,
-        formData.email,
-        formData.password,
-        formData.firstName,
-        formData.lastName
+      postProject(
+        formData.title,
+        formData.description,
+        formData.goal,
+        formData.image,
+        formData.isOpen,
+        formData.startDate,
+        formData.endDate,
       )
-        .then((response) => {
-          window.localStorage.setItem("token", response.token);
-          navigate("/login");
+        .then(() => {
+          navigate("/");
         })
         .catch((error) => {
-          console.error("Signup failed:", error);
+          console.error("Adding a new project failed:", error);
           // Optionally, update the UI to reflect the error
         });
     }
@@ -124,7 +127,6 @@ export default function AddProjectPage() {
                       required
                       id="startDate"
                       label="Start Date"
-                      name="startDate"
                       value={formData.startDate}
                       onChange={handleChange}
                     />
@@ -140,29 +142,48 @@ export default function AddProjectPage() {
                 </LocalizationProvider>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  autoComplete="email"
-                />
+                            <FormControl fullWidth >
+                  <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                  <OutlinedInput
+                      startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                      required
+                      fullWidth
+                      type={"number"}
+                      id="goal"
+                      label="Amount to raise"
+                      name="goal"
+                      value={formData.goal}
+                      onChange={handleChange}
+                      autoComplete="goal"
+                  />
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  value={formData.password}
+                  name="image"
+                  label="Image Address"
+                  type="url"
+                  id="image"
+                  value={formData.image}
                   onChange={handleChange}
-                  autoComplete="new-password"
+                  autoComplete="image"
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                    control={
+                      <Switch
+                          checked={formData.isOpen}
+                          onChange={(event, checked) => setFormData({ ...formData, isOpen: checked })}
+                          name="isOpen"
+                          inputProps={{ 'aria-label': 'controlled' }}
+                      />
+                    }
+                    label="Open Project"
+                />
+
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
@@ -179,18 +200,10 @@ export default function AddProjectPage() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              SUBMIT
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <RouterLink to="/login" variant="body2">
-                  Already have an account? Sign in
-                </RouterLink>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </>
   );
