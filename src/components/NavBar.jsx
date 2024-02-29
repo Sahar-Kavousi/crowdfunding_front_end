@@ -57,8 +57,8 @@ function NavBar() {
             <Typography
               variant="h6"
               noWrap
-              component="a"
-              href="/"
+              component={Link}
+              to="/"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -113,12 +113,12 @@ function NavBar() {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+            {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
             <Typography
               variant="h5"
               noWrap
-              component="a"
-              href="/"
+              component={Link}
+              to="/"
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
@@ -130,7 +130,7 @@ function NavBar() {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              FitFlare
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (

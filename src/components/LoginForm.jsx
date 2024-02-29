@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -123,14 +123,14 @@ function LoginForm() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <RouterLink to="/" variant="body2">
                   Forgot password?
-                </Link>
+                </RouterLink>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <RouterLink to="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
-                </Link>
+                </RouterLink>
               </Grid>
             </Grid>
             <Copyright sx={{ mt: 5 }} />

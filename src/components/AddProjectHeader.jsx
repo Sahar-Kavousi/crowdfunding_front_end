@@ -5,12 +5,14 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import useAuth from "../hooks/use-auth.js";
+import PropTypes from 'prop-types';
 
-export default function Hero() {
-  const { auth, setAuth } = useAuth();
+type prop{
+    header: String,
+    subTitle?: string
+}
+export default function AddProjectHeader() {
 
   return (
     <Box
@@ -31,7 +33,7 @@ export default function Hero() {
           flexDirection: "column",
           alignItems: "center",
           pt: { xs: 14, sm: 20 },
-          pb: { xs: 8, sm: 12 },
+          //   pb: { xs: 8, sm: 12 },
         }}
       >
         <Stack spacing={2} useFlexGap sx={{ width: { xs: "100%", sm: "70%" } }}>
@@ -62,33 +64,7 @@ export default function Hero() {
           <Typography variant="body1" textAlign="center" color="text.secondary">
             Transforming Lives Through Innovation and Community Support <br />
           </Typography>
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            alignSelf="center"
-            spacing={1}
-            useFlexGap
-            sx={{ pt: 2, width: { xs: "100%", sm: "auto" } }}
-          >
-            {/* <TextField
-              id="outlined-basic"
-              hiddenLabel
-              size="small"
-              variant="outlined"
-              aria-label="Enter your email address"
-              placeholder="Your email address"
-              inputProps={{
-                autoComplete: "off",
-              }}
-            /> */}
-            <Button
-              variant="contained"
-              color="primary"
-              component={Link}
-              to={auth.token ? "/addProject" : "/login"}
-            >
-              Start a Campaign now
-            </Button>
-          </Stack>
+
           <Typography
             variant="caption"
             textAlign="center"

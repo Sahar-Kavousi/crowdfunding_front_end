@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import ShareIcon from "@mui/icons-material/Share"; // Import the share icon
 import Grid from "@mui/material/Grid";
+import "./ProjectPage.css";
 
 function ProjectPage() {
   // Here we use a hook that comes for free in react router called `useParams`to get
@@ -179,71 +180,26 @@ function ProjectPage() {
     //     Share Now
     //   </Button>
     // </Container>
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        {/* Title */}
-        <Typography variant="h4">{project.project.title}</Typography>
-      </Grid>
-      <Grid item xs={6}>
-        <img
-          src={project.project.image}
-          alt={project.project.title}
-          loading="lazy"
-          style={{
-            width: "100%",
-            height: imageHeight,
-            objectFit: "cover",
-            marginBottom: "16px", // Add space between image and button
-          }}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        {/* Fundraiser Name */}
-        <Typography
-          variant="h6"
-          gutterBottom
-          style={{ textAlign: "left", align: "left" }}
-        >
-          Fundraiser: {project.project.id}
-        </Typography>
-        {/* Created At */}
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          gutterBottom
-          style={{ textAlign: "left" }}
-        >
-          Created At: {createdTime}
-        </Typography>
-        {/* Fundraiser Status */}
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          gutterBottom
-          style={{ textAlign: "left" }}
-        >
-          Status: {project.project.status}
-        </Typography>
-        {/* Goal Amount  */}
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          gutterBottom
-          style={{ textAlign: "left" }}
-        >
-          Goal Amount: ${project.project.goal}
-        </Typography>
-        {/* Amount Raised */}
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          gutterBottom
-          style={{ textAlign: "left" }}
-        >
-          Amount Raised: ${project.project.amount}
-        </Typography>
-      </Grid>
-      <Grid item xs={6}>
+
+    <div className="product-container">
+      <div className="product-row1">
+        <div className="product-image">
+          <img
+            src={project.project.image}
+            alt={project.project.title}
+            loading="lazy"
+            style={{
+              width: "60%",
+              height: imageHeight,
+              objectFit: "cover",
+            }}
+          />
+          <div className="product-image">
+            <p>TETETET</p>
+          </div>
+        </div>
+      </div>
+      <div className="product-row2">
         {/* Donation Button */}
         <Button
           variant="contained"
@@ -262,8 +218,94 @@ function ProjectPage() {
           <ShareIcon style={{ marginRight: "8px" }} />
           Share Now
         </Button>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
+
+    // <Grid container spacing={2}>
+    //   <Grid item xs={12}>
+    //     {/* Title */}
+    //     <Typography variant="h4">{project.project.title}</Typography>
+    //   </Grid>
+    //   <Grid item xs={6}>
+    //     <img
+    //       src={project.project.image}
+    //       alt={project.project.title}
+    //       loading="lazy"
+    //       style={{
+    //         width: "100%",
+    //         height: imageHeight,
+    //         objectFit: "cover",
+    //         marginBottom: "16px", // Add space between image and button
+    //       }}
+    //     />
+    //   </Grid>
+    //   <Grid item xs={12}>
+    //     {/* Fundraiser Name */}
+    //     <Typography
+    //       variant="h6"
+    //       gutterBottom
+    //       style={{ textAlign: "left", align: "left" }}
+    //     >
+    //       Fundraiser: {project.project.id}
+    //     </Typography>
+    //     {/* Created At */}
+    //     <Typography
+    //       variant="body2"
+    //       color="textSecondary"
+    //       gutterBottom
+    //       style={{ textAlign: "left" }}
+    //     >
+    //       Created At: {createdTime}
+    //     </Typography>
+    //     {/* Fundraiser Status */}
+    //     <Typography
+    //       variant="body2"
+    //       color="textSecondary"
+    //       gutterBottom
+    //       style={{ textAlign: "left" }}
+    //     >
+    //       Status: {project.project.status}
+    //     </Typography>
+    //     {/* Goal Amount  */}
+    //     <Typography
+    //       variant="body2"
+    //       color="textSecondary"
+    //       gutterBottom
+    //       style={{ textAlign: "left" }}
+    //     >
+    //       Goal Amount: ${project.project.goal}
+    //     </Typography>
+    //     {/* Amount Raised */}
+    //     <Typography
+    //       variant="body2"
+    //       color="textSecondary"
+    //       gutterBottom
+    //       style={{ textAlign: "left" }}
+    //     >
+    //       Amount Raised: ${project.project.amount}
+    //     </Typography>
+    //   </Grid>
+    //   <Grid item xs={6}>
+    //     {/* Donation Button */}
+    //     <Button
+    //       variant="contained"
+    //       color="primary"
+    //       onClick={handleDonate}
+    //       style={{ width: "100%", marginBottom: "8px" }}
+    //     >
+    //       Donate now
+    //     </Button>
+    //     <Button
+    //       variant="contained"
+    //       color="primary"
+    //       onClick={handleShare}
+    //       style={{ width: "100%", display: "flex", alignItems: "center" }}
+    //     >
+    //       <ShareIcon style={{ marginRight: "8px" }} />
+    //       Share Now
+    //     </Button>
+    //   </Grid>
+    // </Grid>
   );
 }
 
