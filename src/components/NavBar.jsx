@@ -16,9 +16,9 @@ import AdbIcon from "@mui/icons-material/Adb";
 import useAuth from "../hooks/use-auth.js";
 
 const pages = [
-  // { lable: "Projects", url: "/projects" },
-  { lable: "Contact", url: "/contact" },
-  { lable: "About", url: "/about" },
+  { label: "Home", url: "/" },
+  { label: "Contact", url: "/contact" },
+  { label: "About", url: "/about" },
 ];
 
 function NavBar() {
@@ -53,7 +53,7 @@ function NavBar() {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            {/*<AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />*/}
             <Typography
               variant="h6"
               noWrap
@@ -103,12 +103,12 @@ function NavBar() {
               >
                 {pages.map((page) => (
                   <MenuItem
-                    key={page.lable}
+                    key={page.label}
                     onClick={handleCloseNavMenu}
                     component={Link}
                     to={page.url}
                   >
-                    <Typography textAlign="center">{page.lable}</Typography>
+                    <Typography textAlign="center">{page.label}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -135,13 +135,13 @@ function NavBar() {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
-                  key={page.lable}
+                  key={page.label}
                   component={Link}
                   to={page.url}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                  {page.lable}
+                  {page.label}
                 </Button>
               ))}
             </Box>
@@ -193,10 +193,9 @@ function NavBar() {
         </Container>
 
       </AppBar>
-        <Container maxWidth="xl">
 
       <Outlet />
-        </Container>
+
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -11,17 +11,16 @@ function ProjectCard(props) {
   const {
     projectData: { id, description, goal, image, raised, title },
   } = props;
-  const handleShare = () => {};
-  const handleReadMore = () => {
-    console.log("on the handleReadMore");
-    Navigate(`/project/${id}`);
+  const handleShare = () => {
+      console.log(`Click on the Shared: ${title}`)
   };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 450 }}>
       <CardMedia
         component="img"
         alt={`${title}.image`}
-        height="140"
+        height="180"
         image={image}
       />
       <CardContent>
@@ -39,7 +38,7 @@ function ProjectCard(props) {
         <Button onClick={handleShare} size="small">
           Share
         </Button>
-        <Button href={`/project/${id}`} size="small">
+        <Button component={Link}  to={`/project/${id}`} size="small">
           Learn More
         </Button>
       </CardActions>
