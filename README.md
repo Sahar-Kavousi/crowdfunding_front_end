@@ -73,21 +73,25 @@ This is a health and fitness crowdfunding site that allows people to ask for spo
 ![Alt Text](crowdfunding-frontend-images/project-creation-form.png)
 
 ### A screenshot of pledging for a project
-![Alt Text](crowdfunding-frontend-images/project-pledge.png)
+![](crowdfunding-frontend-images/project-pledge.png)
 
 ### A screenshot of Edit a project 
+Displaying the Edit button if user is admin of that project.
 
-![Displaying the Edit button if user is admin of that project.](crowdfunding-frontend-images/edit-project-page.png)
+![](crowdfunding-frontend-images/edit-project-page.png)
 
 ### A screenshot of Delete a project
-![Display the Delete button if user is admin of that project.](crowdfunding-frontend-images/delete-project.png)
+Displaying the Delete button if user is admin of that project.
+
+![](crowdfunding-frontend-images/delete-project.png)
 
 
 ### A screenshot of Login form 
-![Alt Text](crowdfunding-frontend-images/login-form.png)
+
+![](crowdfunding-frontend-images/login-form.png)
 
 ### A screenshot of Signup form
-![Alt Text](crowdfunding-frontend-images/signup-form.png)
+![](crowdfunding-frontend-images/signup-form.png)
 
 
 
