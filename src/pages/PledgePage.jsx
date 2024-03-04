@@ -25,7 +25,7 @@ function PledgePage() {
     const { id } = useParams();
 
     const [formData, setFormData] = useState({
-        anonymous: true,
+        anonymous: false,
         amount: 40, // Corrected typo here
         comment: "",
         project: +id,

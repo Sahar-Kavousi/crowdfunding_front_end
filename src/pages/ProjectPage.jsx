@@ -1,4 +1,4 @@
-import {Link, Navigate, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import useProject from "../hooks/use-project";
 import DeleteProject from "../api/delete-project.js"
 import {useState, useEffect} from "react";
@@ -20,6 +20,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
 import useAuth from "../hooks/use-auth.js";
 import ResponsiveDialog from "../components/ResponsiveDialog.jsx";
+import DisplayPledges from "../components/DisplayPledges.jsx";
 
 const Item = styled(Paper)(({theme}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff', ...theme.typography.body2,
@@ -79,11 +80,7 @@ function ProjectPage() {
     // Parse and format the creation time in a user-friendly way
     const createdTime = new Date(Date.parse(project.project.date_created)).toLocaleString();
 
-    // Function to handle the donation action
-    const handleDonate = () => {
-        // Implement donation logic here
-        console.log("Donation button clicked!");
-    };
+
     // Function to handle the remove a project action
     const handleRemoveProject = (projectId) => {
         // Implement donation logic here
@@ -108,54 +105,7 @@ function ProjectPage() {
                                 style={{
                                     width: "100%", height: imageHeight, objectFit: "cover",
                                 }}
-                            /></Item>
-                    </Grid>
-                    <Grid xs={12} sm={4}>
-                        <Item>
-                            <Box alignItems={'center'} sx={{display: 'flex', alignContent: 'center', m: 2}}>
-                                {/*<AttachMoneyIcon/>*/}
-                                <Typography variant="h5" component="h4">
-                                    <strong>${(project.project.goal - project.amount_to_raise)}</strong>
-                                </Typography>&nbsp;
-                                <Typography>raised of ${project.project.goal} goal
-                                </Typography>
-                            </Box>
-                            <Typography variant="subtitle1" alignItems={'center'}
-                                        sx={{display: 'flex', alignContent: 'center', m: 2}}>
-                                {project?.project?.pledges.length ?? 0} donations
-                            </Typography>
-                            <LinearProgressWithLabel sx={{m: 2}}
-                                                     value={project.amount_to_raise ? Math.round(((project.project.goal - project.amount_to_raise) * 100) / project.project.goal) : 0}
                             />
-                            <Box sx={{flexGrow: 1, gap: 2, m: 2}}
-                                 display="flex"
-                                 flexDirection="column"
-                                 alignItems="center">
-                                {/* Donation Button */}
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={handleDonate}
-                                    style={{width: "100%"}}
-                                    component={Link}
-                                    to={`/project/pledge/${id}`}
-                                >
-                                    Donate now
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={handleShare}
-                                    style={{width: "100%", display: "flex", alignItems: "center"}}
-                                >
-                                    <ShareIcon style={{marginRight: "8px"}}/>
-                                    Share Now
-                                </Button>
-                            </Box>
-                        </Item>
-                    </Grid>
-                    <Grid xs={12} sm={8}>
-                        <Item>
                             {ownerData?.username ? (
                                 <Box alignItems={'center'} sx={{display: 'flex', alignContent: 'center', m: 2}}>
                                     {/*<AttachMoneyIcon/>*/}
@@ -186,6 +136,56 @@ function ProjectPage() {
                                 </Stack>)}
                             </Box>
                         </Item>
+
+                    </Grid>
+                    <Grid xs={12} sm={4}>
+                        <Item>
+                            <Box alignItems={'center'} sx={{display: 'flex', alignContent: 'center', m: 2}}>
+                                {/*<AttachMoneyIcon/>*/}
+                                <Typography variant="h5" component="h4">
+                                    <strong>${(project.project.goal - project.amount_to_raise)}</strong>
+                                </Typography>&nbsp;
+                                <Typography>raised of ${project.project.goal} goal
+                                </Typography>
+                            </Box>
+                            <Typography variant="subtitle1" alignItems={'center'}
+                                        sx={{display: 'flex', alignContent: 'center', m: 2}}>
+                                {project?.project?.pledges.length ?? 0} donations
+                            </Typography>
+                            <LinearProgressWithLabel sx={{m: 2}}
+                                                     value={project.amount_to_raise ? Math.round(((project.project.goal - project.amount_to_raise) * 100) / project.project.goal) : 0}
+                            />
+                            <Box sx={{flexGrow: 1, gap: 2, m: 2}}
+                                 display="flex"
+                                 flexDirection="column"
+                                 alignItems="center">
+                                {/* Donation Button */}
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    style={{width: "100%"}}
+                                    component={Link}
+                                    to={`/project/pledge/${id}`}
+                                >
+                                    Donate now
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={handleShare}
+                                    style={{width: "100%", display: "flex", alignItems: "center"}}
+                                >
+                                    <ShareIcon style={{marginRight: "8px"}}/>
+                                    Share Now
+                                </Button>
+                            </Box>
+                            <Box sx={{flexGrow: 1, gap: 2, m: 2, pt:5}}>
+                                <DisplayPledges pledges={project?.project?.pledges}/>
+                            </Box>
+                        </Item>
+                    </Grid>
+                    <Grid xs={12} sm={8}>
+
 
                     </Grid>
 
