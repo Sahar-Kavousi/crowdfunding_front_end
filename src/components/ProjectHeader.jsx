@@ -8,7 +8,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 
-export default ({title, subTitle}) => (
+export default ({titlePart1,titlePart2, subTitle}) => (
     <Box
         id="hero"
         sx={(theme) => ({
@@ -32,8 +32,8 @@ export default ({title, subTitle}) => (
         >
             <Stack spacing={2} useFlexGap sx={{width: {xs: "100%", sm: "70%"}}}>
                 <Typography
-                    component="h1"
-                    variant="h1"
+                    component="h4"
+                    variant="h4"
                     sx={{
                         display: "flex",
                         flexDirection: {xs: "column", md: "row"},
@@ -41,10 +41,10 @@ export default ({title, subTitle}) => (
                         textAlign: "center",
                     }}
                 >
-                    Add a New&nbsp;
+                    {titlePart1}&nbsp;
                     <Typography
                         component="span"
-                        variant="h1"
+                        variant="h4"
                         sx={{
                             color: (theme) =>
                                 theme.palette.mode === "light"
@@ -52,7 +52,7 @@ export default ({title, subTitle}) => (
                                     : "primary.light",
                         }}
                     >
-                        Project
+                        {titlePart2}
                     </Typography>
                 </Typography>
                 <Typography variant="body1" textAlign="center" color="text.secondary">

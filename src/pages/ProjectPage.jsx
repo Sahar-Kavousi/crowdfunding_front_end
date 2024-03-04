@@ -1,320 +1,214 @@
-import { useParams } from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import useProject from "../hooks/use-project";
-import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
+import DeleteProject from "../api/delete-project.js"
+import {useState, useEffect} from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 import ShareIcon from "@mui/icons-material/Share"; // Import the share icon
-import Grid from "@mui/material/Grid";
 import "./ProjectPage.css";
 import ProjectHeader from "../components/ProjectHeader.jsx";
+import {styled} from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Unstable_Grid2';
+import LinearProgressWithLabel from "../components/LinearProgressWithLabel.jsx";
+import GetUserDetails from "../api/get-user-details.js";
+import {Skeleton} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import Stack from '@mui/material/Stack';
+import useAuth from "../hooks/use-auth.js";
+import ResponsiveDialog from "../components/ResponsiveDialog.jsx";
+import DisplayPledges from "../components/DisplayPledges.jsx";
+
+const Item = styled(Paper)(({theme}) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff', ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
 
 function ProjectPage() {
-  // Here we use a hook that comes for free in react router called `useParams`to get
-  // the id from the URL so that we can pass it to our useProject hook.
-  const { id } = useParams();
-  // useProject returns three pieces of info, so we need to grab them all here
-  const { project, isLoading, error } = useProject(id);
+    const {auth} = useAuth();
+    const navigate = useNavigate();
 
-  if (isLoading) {
-    return <h1>loading...</h1>;
-  }
-  if (error) {
-    return <h1>{error.message}</h1>;
-  }
+    // Here we use a hook that comes for free in react router called `useParams`to get
+    // the id from the URL so that we can pass it to our useProject hook.
+    const {id} = useParams();
+    // useProject returns three pieces of info, so we need to grab them all here
+    const {project, isLoading, error} = useProject(id);
 
-  // Function to handle the share action
-  const handleShare = () => {
-    // Implement share logic here
-    console.log("Share button clicked!");
-  };
+    const [isOpen, setIsOpen] = useState(false);
 
-  const imageHeight = 400; // Set the desired height for the image
+    const handleOpen = () => setIsOpen(true);
+    const handleClose = () => setIsOpen(false);
 
-  // Parse and format the creation time in a user-friendly way
-  const createdTime = new Date(
-    Date.parse(project.project.date_created)
-  ).toLocaleString();
+    // State to hold the fetched data
+    const [ownerData, setOwnerData] = useState(null);
+    // State to hold any error from the fetch operation
+    const [ownerError, setOwnerError] = useState(null);
+    // State to indicate if the request is still loading
+    const [ownerLoading, setOwnerLoading] = useState(true);
 
-  //   return (
-  //     <div>
-  //       <h2>{project.project.title}</h2>
-  //       <h3>Created at: {project.project.date_created}</h3>
-  //       <h3>{`Status: ${project.project.is_open}`}</h3>
-  //       <h3>Pledges:</h3>
-  //       <ul>
-  //         {project.project.pledges.map((pledgeData, key) => {
-  //           return (
-  //             <li key={key}>
-  //               {pledgeData.amount} from {pledgeData.supporter}
-  //             </li>
-  //           );
-  //         })}
-  //       </ul>
-  //     </div>
-  //   );
+    useEffect(() => {
+        GetUserDetails(2).then(owner => {
+            setOwnerData({...owner});
+            setOwnerLoading(false);
+        }).catch((error) => {
+            setOwnerError(error);
+            setOwnerLoading(false);
+        });
+    }, [project?.project?.owner]);
 
-  return (
-    // <Container
-    //   style={{
-    //     paddingLeft: "20px",
-    //     paddingTop: "20px",
-    //     margin: "0",
-    //   }}
-    //   maxWidth="sm"
-    // >
-    //   {/* Title */}
-    //   <Typography variant="h4" gutterBottom>
-    //     {project.project.title}
-    //   </Typography>
+    if (isLoading) {
+        return <h1>loading...</h1>;
+    }
+    if (error) {
+        return <h1>{error.message}</h1>;
+    }
 
-    //   <Box
-    //     sx={{
-    //       height: imageHeight + 100, // Adjust the container height accordingly
-    //       display: "flex",
-    //       flexDirection: "column", // Align button below the image
-    //       alignItems: "center",
-    //       justifyContent: "center",
-    //       paddingTop: "30px",
-    //     }}
-    //   >
-    //     <img
-    //       src={project.project.image}
-    //       alt={project.project.title}
-    //       loading="lazy"
-    //       style={{
-    //         width: "100%",
-    //         height: imageHeight,
-    //         objectFit: "cover",
-    //         marginBottom: "16px", // Add space between image and button
-    //       }}
-    //     />
-    //   </Box>
-    //   <Box
-    //     component="section"
-    //     sx={{
-    //       p: 2,
-    //       border: "1px dashed grey",
-    //       display: "flex",
-    //       flexDirection: "column", // Align button below the image
-    //       alignItems: "left",
-    //       justifyContent: "left",
-    //       width: "100%",
-    //       mb: "1rem",
-    //     }}
-    //   >
-    //     {/* Fundraiser Name */}
-    //     <Typography
-    //       variant="h6"
-    //       gutterBottom
-    //       style={{ textAlign: "left", align: "left" }}
-    //     >
-    //       Fundraiser: {project.project.id}
-    //     </Typography>
-    //     {/* Created At */}
-    //     <Typography
-    //       variant="body2"
-    //       color="textSecondary"
-    //       gutterBottom
-    //       style={{ textAlign: "left" }}
-    //     >
-    //       Created At: {createdTime}
-    //     </Typography>
-    //     {/* Fundraiser Status */}
-    //     <Typography
-    //       variant="body2"
-    //       color="textSecondary"
-    //       gutterBottom
-    //       style={{ textAlign: "left" }}
-    //     >
-    //       Status: {project.project.status}
-    //     </Typography>
-    //     {/* Goal Amount  */}
-    //     <Typography
-    //       variant="body2"
-    //       color="textSecondary"
-    //       gutterBottom
-    //       style={{ textAlign: "left" }}
-    //     >
-    //       Goal Amount: ${project.project.goal}
-    //     </Typography>
-    //     {/* Amount Raised */}
-    //     <Typography
-    //       variant="body2"
-    //       color="textSecondary"
-    //       gutterBottom
-    //       style={{ textAlign: "left" }}
-    //     >
-    //       Amount Raised: ${project.project.amount}
-    //     </Typography>
-    //     {/* Goal Amount and Amount Raised */}
-    //     {/* <Typography
-    //       variant="body2"
-    //       color="textSecondary"
-    //       gutterBottom
-    //       style={{ textAlign: "left" }}
-    //     >
-    //       Goal Amount: ${project.project.goal_amount} | Amount Raised: $
-    //       {project.project.amount_raised}
-    //     </Typography> */}
-    //   </Box>
-    //   {/* Donation Button */}
-    //   <Button
-    //     variant="contained"
-    //     color="primary"
-    //     onClick={handleDonate}
-    //     style={{ width: "100%", marginBottom: "8px" }}
-    //   >
-    //     Donate now
-    //   </Button>
 
-    //   <Button
-    //     variant="contained"
-    //     color="primary"
-    //     onClick={handleShare}
-    //     style={{ width: "100%", display: "flex", alignItems: "center" }}
-    //   >
-    //     <ShareIcon style={{ marginRight: "8px" }} />
-    //     Share Now
-    //   </Button>
-    // </Container>
+    // Function to handle the share action
+    const handleShare = () => {
+        // Implement share logic here
+        console.log("Share button clicked!");
+    };
 
-    <div className="product-container">
-      <ProjectHeader/>
+    const imageHeight = 400; // Set the desired height for the image
 
-      <div className="product-row1">
-        <div className="product-image">
-          <img
-            src={project.project.image}
-            alt={project.project.title}
-            loading="lazy"
-            style={{
-              width: "60%",
-              height: imageHeight,
-              objectFit: "cover",
-            }}
-          />
-          <div className="product-image">
-            <p>TETETET</p>
-          </div>
-        </div>
-      </div>
-      <div className="product-row2">
-        {/* Donation Button */}
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleDonate}
-          style={{ width: "100%", marginBottom: "8px" }}
-        >
-          Donate now
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleShare}
-          style={{ width: "100%", display: "flex", alignItems: "center" }}
-        >
-          <ShareIcon style={{ marginRight: "8px" }} />
-          Share Now
-        </Button>
-      </div>
-    </div>
+    // Parse and format the creation time in a user-friendly way
+    const createdTime = new Date(Date.parse(project.project.date_created)).toLocaleString();
 
-    // <Grid container spacing={2}>
-    //   <Grid item xs={12}>
-    //     {/* Title */}
-    //     <Typography variant="h4">{project.project.title}</Typography>
-    //   </Grid>
-    //   <Grid item xs={6}>
-    //     <img
-    //       src={project.project.image}
-    //       alt={project.project.title}
-    //       loading="lazy"
-    //       style={{
-    //         width: "100%",
-    //         height: imageHeight,
-    //         objectFit: "cover",
-    //         marginBottom: "16px", // Add space between image and button
-    //       }}
-    //     />
-    //   </Grid>
-    //   <Grid item xs={12}>
-    //     {/* Fundraiser Name */}
-    //     <Typography
-    //       variant="h6"
-    //       gutterBottom
-    //       style={{ textAlign: "left", align: "left" }}
-    //     >
-    //       Fundraiser: {project.project.id}
-    //     </Typography>
-    //     {/* Created At */}
-    //     <Typography
-    //       variant="body2"
-    //       color="textSecondary"
-    //       gutterBottom
-    //       style={{ textAlign: "left" }}
-    //     >
-    //       Created At: {createdTime}
-    //     </Typography>
-    //     {/* Fundraiser Status */}
-    //     <Typography
-    //       variant="body2"
-    //       color="textSecondary"
-    //       gutterBottom
-    //       style={{ textAlign: "left" }}
-    //     >
-    //       Status: {project.project.status}
-    //     </Typography>
-    //     {/* Goal Amount  */}
-    //     <Typography
-    //       variant="body2"
-    //       color="textSecondary"
-    //       gutterBottom
-    //       style={{ textAlign: "left" }}
-    //     >
-    //       Goal Amount: ${project.project.goal}
-    //     </Typography>
-    //     {/* Amount Raised */}
-    //     <Typography
-    //       variant="body2"
-    //       color="textSecondary"
-    //       gutterBottom
-    //       style={{ textAlign: "left" }}
-    //     >
-    //       Amount Raised: ${project.project.amount}
-    //     </Typography>
-    //   </Grid>
-    //   <Grid item xs={6}>
-    //     {/* Donation Button */}
-    //     <Button
-    //       variant="contained"
-    //       color="primary"
-    //       onClick={handleDonate}
-    //       style={{ width: "100%", marginBottom: "8px" }}
-    //     >
-    //       Donate now
-    //     </Button>
-    //     <Button
-    //       variant="contained"
-    //       color="primary"
-    //       onClick={handleShare}
-    //       style={{ width: "100%", display: "flex", alignItems: "center" }}
-    //     >
-    //       <ShareIcon style={{ marginRight: "8px" }} />
-    //       Share Now
-    //     </Button>
-    //   </Grid>
-    // </Grid>
-  );
+
+    // Function to handle the remove a project action
+    const handleRemoveProject = (projectId) => {
+        // Implement donation logic here
+        DeleteProject(projectId).then(() => {
+            navigate('/');
+        });
+
+    };
+
+    return (<>
+
+        <ProjectHeader titlePart1={project.project.title}/>
+        <Container maxWidth="xl">
+            <Box sx={{flexGrow: 1}}>
+                <Grid container spacing={2}>
+                    <Grid xs={12} sm={8}>
+                        <Item>
+                            <img
+                                src={project.project.image}
+                                alt={project.project.title}
+                                loading="lazy"
+                                style={{
+                                    width: "100%", height: imageHeight, objectFit: "cover",
+                                }}
+                            />
+                            {ownerData?.username ? (
+                                <Box alignItems={'center'} sx={{display: 'flex', alignContent: 'center', m: 2}}>
+                                    {/*<AttachMoneyIcon/>*/}
+                                    <Typography>
+                                        {ownerData?.first_name && ownerData?.last_name ? `${ownerData?.first_name} ${ownerData?.last_name}` : ownerData?.username} is
+                                        organizing this fundraiser.
+                                    </Typography>
+                                </Box>
+                            ) : (<Box>
+                                <Skeleton/>
+                                <Skeleton/>
+                                <Skeleton/>
+
+                            </Box>)}
+                            <Box alignItems={'center'} sx={{display: 'flex', alignContent: 'center', mx: 2, my: 5}}>
+                                <Typography>
+                                    {project?.project?.description}
+                                </Typography>
+                            </Box>
+                            <Box alignItems={'center'} sx={{display: 'flex', alignContent: 'center', mx: 2, my: 5}}>
+                                {project?.project?.owner === auth?.user?.id && (<Stack direction="row" spacing={2}>
+                                    <Button variant="outlined" onClick={handleOpen} startIcon={<DeleteIcon/>}>
+                                        Delete
+                                    </Button>
+                                    <Button variant="contained" endIcon={<EditIcon/>}>
+                                        Edit
+                                    </Button>
+                                </Stack>)}
+                            </Box>
+                        </Item>
+
+                    </Grid>
+                    <Grid xs={12} sm={4}>
+                        <Item>
+                            <Box alignItems={'center'} sx={{display: 'flex', alignContent: 'center', m: 2}}>
+                                {/*<AttachMoneyIcon/>*/}
+                                <Typography variant="h5" component="h4">
+                                    <strong>${(project.project.goal - project.amount_to_raise)}</strong>
+                                </Typography>&nbsp;
+                                <Typography>raised of ${project.project.goal} goal
+                                </Typography>
+                            </Box>
+                            <Typography variant="subtitle1" alignItems={'center'}
+                                        sx={{display: 'flex', alignContent: 'center', m: 2}}>
+                                {project?.project?.pledges.length ?? 0} donations
+                            </Typography>
+                            <LinearProgressWithLabel sx={{m: 2}}
+                                                     value={project.amount_to_raise ? Math.round(((project.project.goal - project.amount_to_raise) * 100) / project.project.goal) : 0}
+                            />
+                            <Box sx={{flexGrow: 1, gap: 2, m: 2}}
+                                 display="flex"
+                                 flexDirection="column"
+                                 alignItems="center">
+                                {/* Donation Button */}
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    style={{width: "100%"}}
+                                    component={Link}
+                                    to={`/project/pledge/${id}`}
+                                >
+                                    Donate now
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={handleShare}
+                                    style={{width: "100%", display: "flex", alignItems: "center"}}
+                                >
+                                    <ShareIcon style={{marginRight: "8px"}}/>
+                                    Share Now
+                                </Button>
+                            </Box>
+                            <Box sx={{flexGrow: 1, gap: 2, m: 2, pt:5}}>
+                                <DisplayPledges pledges={project?.project?.pledges}/>
+                            </Box>
+                        </Item>
+                    </Grid>
+                    <Grid xs={12} sm={8}>
+
+
+                    </Grid>
+
+                </Grid>
+            </Box>
+        </Container>
+        <ResponsiveDialog
+            isOpen={isOpen}
+            handleClose={handleClose}
+            title="Delete Project"
+            content="Are you sure you want to delte this project?."
+            actions={[
+                {label: "Cancel", onClick: handleClose},
+                {
+                    label: "Delete", onClick: () => {
+                        /* handle submit */
+                        handleRemoveProject(project.project.id);
+                        handleClose();
+                    }
+                },
+            ]}
+        />
+    </>);
 }
 
-// Function to handle the donation action
-const handleDonate = () => {
-  // Implement donation logic here
-  console.log("Donation button clicked!");
-};
 export default ProjectPage;

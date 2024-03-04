@@ -72,7 +72,7 @@ export default function AddProjectPage() {
 
   return (
     <>
-      <AddProjectHeader />
+      <AddProjectHeader titlePart1={"Add a new"} titlePart2={"Project"}/>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
