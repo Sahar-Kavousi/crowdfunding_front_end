@@ -1,9 +1,9 @@
-async function postProject(title, description, goal, image, isOpen,startDate,endDate) {
-    const url = `${import.meta.env.VITE_API_URL}/projects/`;
+async function putProject(projectId,title, description, goal, image, isOpen,startDate,endDate) {
+    const url = `${import.meta.env.VITE_API_URL}/project/${projectId}/`;
     const token=`Token ${window.localStorage.getItem("token")}`;
 
     const response = await fetch(url, {
-        method: "POST",
+        method: "PUT",
         // We need to tell the server that we are sending JSON data so we set the Content-Type header to application/json
         headers: {
             "Content-Type": "application/json",
@@ -22,7 +22,7 @@ async function postProject(title, description, goal, image, isOpen,startDate,end
     });
 
     if (!response.ok) {
-        const fallbackError = `Error trying to add new project`;
+        const fallbackError = `Error trying to edit project`;
         const data = await response.json().catch(() => {
             throw new Error(fallbackError);
         });
@@ -31,4 +31,4 @@ async function postProject(title, description, goal, image, isOpen,startDate,end
     }
     return await response.json();
 }
-export default postProject;
+export default putProject;

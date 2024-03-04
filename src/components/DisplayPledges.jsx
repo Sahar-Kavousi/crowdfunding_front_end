@@ -1,10 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Unstable_Grid2";
-import ProjectCard from "./ProjectCard.jsx";
 
 DisplayPledges.propTypes = {
     pledges: PropTypes.arrayOf(

@@ -28,6 +28,7 @@ const router = createBrowserRouter([
             {path: "/contact", element: <ContactPage/>},
             {path: "/about", element: <AboutPage/>},
             {path: "/addProject", element: (<ProtectedRoute><AddProjectPage/></ProtectedRoute>)},
+            {path: "/addProject/:id", element: (<ProtectedRoute><AddProjectPage/></ProtectedRoute>)},
             {path: "/project/:id", element: (<ProtectedRoute><ProjectPage/></ProtectedRoute>)},
             {path: "/project/pledge/:id", element: (<ProtectedRoute><PledgePage/></ProtectedRoute>)},
         ],

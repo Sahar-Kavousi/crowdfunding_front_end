@@ -139,7 +139,6 @@ function LoginForm() {
                                 </RouterLink>
                             </Grid>
                         </Grid>
-                        <Copyright sx={{mt: 5}}/>
                     </Box>
                 </Box>
             </Grid>
