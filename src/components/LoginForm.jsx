@@ -39,20 +39,17 @@ function LoginForm() {
         if (credentials.username && credentials.password) {
             const token_response = await postLogin(credentials.username, credentials.password);
             window.localStorage.setItem("token", token_response.token);
-            setAuth({
-                token: token_response.token,
-            });
 
             if (token_response.token) {
                 const userDetails = await getCurrentUserDetails();
                 window.localStorage.setItem("user", JSON.stringify(userDetails));
-                setAuth(...auth, {
-                    user: {...JSON.parse(userDetails)}
+                setAuth({
+                    token: token_response.token,
+                    user: {...userDetails}
                 });
+
+                navigate("/");
             }
-
-            navigate("/");
-
         }
     };
     return (
