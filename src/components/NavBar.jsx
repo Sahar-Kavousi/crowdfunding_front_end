@@ -28,7 +28,8 @@ function NavBar() {
 
   const handleLogout = () => {
     window.localStorage.removeItem("token");
-    setAuth({ token: null });
+    window.localStorage.removeItem("user");
+    setAuth({ token: null , user: null});
   };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -36,6 +37,7 @@ function NavBar() {
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+      console.log(auth.user.username)
     console.log(`handleOpenUserMenu : ${event.currentTarget}`);
   };
 
@@ -150,7 +152,7 @@ function NavBar() {
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
-                      alt="Sahar Kavousi"
+                      alt={!auth?.user?.first_name ? (!auth?.user?.username ? 'Anonymous' : auth.user.username) : `${auth.user.first_name} ${auth.user.last_name}`}
                       src="/static/images/avatar/2.jpg"
                     />
                   </IconButton>
