@@ -1,15 +1,7 @@
 import React from "react";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 
 function AboutPage() {
-  return (
-    <Stack spacing={2} direction="row">
-      <Button variant="text">Text</Button>
-      <Button variant="contained">Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-    </Stack>
-  );
+  return <h1>This is the About page</h1>;
 }
 
 export default AboutPage;

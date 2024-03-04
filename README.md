@@ -4,7 +4,7 @@
 
 ### Deployed Project Link:
 
-.........
+https://gleeful-sunshine-a78ad4.netlify.app/
 
 
 
@@ -43,22 +43,21 @@ This is a health and fitness crowdfunding site that allows people to ask for spo
     [x] Whether the pledge is anonymous or not
     [x] A comment to go along with the pledge
 
-[ ] Implement suitable update/delete functionality, e.g. should a project owner be allowed to update a project description?
+[x] Implement suitable update/delete functionality, e.g. should a project owner be allowed to update a project description?
 
-[ ] Implement suitable permissions, e.g. who is allowed to delete a pledge?
+[x] Implement suitable permissions, e.g. who is allowed to delete a pledge?
 
 [ ] Return the relevant status codes for both successful and unsuccessful requests to the API.
 
 [ ] Handle failed requests gracefully (e.g. you should have a custom 404 page rather than the default error page).
 
-[ ] Use Token Authentication.
+[x] Use Token Authentication.
 
-[ ] Implement responsive design.
+[x] Implement responsive design.
 
 
 ## Screenshots
 
-[x] A link to the deployed project.
 
 [x] A screenshot of the home page
 

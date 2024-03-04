@@ -18,8 +18,13 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Switch from '@mui/material/Switch';
-import {FormControl, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
+import Switch from "@mui/material/Switch";
+import {
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from "@mui/material";
 
 export default function AddProjectPage() {
   const navigate = useNavigate();
@@ -58,7 +63,7 @@ export default function AddProjectPage() {
         formData.image,
         formData.isOpen,
         formData.startDate,
-        formData.endDate,
+        formData.endDate
       )
         .then(() => {
           navigate("/");
@@ -72,7 +77,7 @@ export default function AddProjectPage() {
 
   return (
     <>
-      <AddProjectHeader titlePart1={"Add a new"} titlePart2={"Project"}/>
+      <AddProjectHeader titlePart1={"Add a new"} titlePart2={"Project"} />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -142,19 +147,23 @@ export default function AddProjectPage() {
                 </LocalizationProvider>
               </Grid>
               <Grid item xs={12}>
-                            <FormControl fullWidth >
-                  <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                <FormControl fullWidth>
+                  <InputLabel htmlFor="outlined-adornment-amount">
+                    Amount
+                  </InputLabel>
                   <OutlinedInput
-                      startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                      required
-                      fullWidth
-                      type={"number"}
-                      id="goal"
-                      label="Amount to raise"
-                      name="goal"
-                      value={formData.goal}
-                      onChange={handleChange}
-                      autoComplete="goal"
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                    required
+                    fullWidth
+                    type={"number"}
+                    id="goal"
+                    label="Amount to raise"
+                    name="goal"
+                    value={formData.goal}
+                    onChange={handleChange}
+                    autoComplete="goal"
                   />
                 </FormControl>
               </Grid>
@@ -173,24 +182,25 @@ export default function AddProjectPage() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                    control={
-                      <Switch
-                          checked={formData.isOpen}
-                          onChange={(event, checked) => setFormData({ ...formData, isOpen: checked })}
-                          name="isOpen"
-                          inputProps={{ 'aria-label': 'controlled' }}
-                      />
-                    }
-                    label="Open Project"
+                  control={
+                    <Switch
+                      checked={formData.isOpen}
+                      onChange={(event, checked) =>
+                        setFormData({ ...formData, isOpen: checked })
+                      }
+                      name="isOpen"
+                      inputProps={{ "aria-label": "controlled" }}
+                    />
+                  }
+                  label="Open Project"
                 />
-
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="I want to receive any update regarding my project via email."
                 />
               </Grid>
             </Grid>
