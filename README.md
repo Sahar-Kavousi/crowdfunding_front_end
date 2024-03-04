@@ -87,6 +87,7 @@ Displaying the Delete button if user is admin of that project.
 
 
 ### A screenshot of Login form 
+
 ![](crowdfunding-frontend-images/login-form.png)
 
 ### A screenshot of Signup form
